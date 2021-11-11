@@ -1,14 +1,9 @@
 import numpy as np
 import random
-from core.models.supernet import GeneralizedMTLNASNet
+from core.models.supernet import EvoNet
 from core.models.vgg16_lfov_bn_16_stages import DeepLabLargeFOVBN16
-def depth_limited_connectivity_matrix(stage_config, limit=3):  # 同类型同级的stage之间保持不超过limit的最远距离连接
-    """
+def depth_limited_connectivity_matrix(stage_config, limit=3):
 
-    :param stage_config: list of number of layers in each stage
-    :param limit: limit of depth difference between connected layers, pass in -1 to disable
-    :return: connectivity matrix
-    """
     network_depth = np.sum(stage_config)
     stage_depths = np.cumsum([0] + stage_config)
     matrix = np.zeros((network_depth, network_depth)).astype('int')
@@ -39,13 +34,9 @@ def get_model(cfg, indi):
         else:
             raise NotImplementedError
 
-    # if cfg.ARCH.SEARCHSPACE == 'GeneralizedMTLNAS':
-    #     if cfg.MODEL.BACKBONE == 'VGG16_13_Stage':
-    #         connectivity = vgg_connectivity
-    #     else:
-    #         raise NotImplementedError
+  
 
-        model = GeneralizedMTLNASNet(cfg, net1, net2,
+        model = EvoNet(cfg, net1, net2,
                                      net1_connectivity_matrix=indi.indi_net1,
                                      net2_connectivity_matrix=indi.indi_net2)
     else:
