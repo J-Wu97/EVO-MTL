@@ -16,18 +16,13 @@ from core.config import cfg
 from core.data import loader
 
 
-class GeneralizedMTLNASNet(nn.Module):
+class EvoNet(nn.Module):
     def __init__(self, cfg, net1, net2,
                  net1_connectivity_matrix,
                  net2_connectivity_matrix
                  ):
-        """
-        :param net1: task one network
-        :param net2: task two network
-        :param net1_connectivity_matrix: Adjacency list for the Single sided NDDR connections
-        :param net2_connectivity_matrix: Adjacency list for the Single sided NDDR connections
-        """
-        super(GeneralizedMTLNASNet, self).__init__()
+        
+        super(EvoNet, self).__init__()
         self.cfg = cfg
         self.net1 = net1
         self.net2 = net2
@@ -111,8 +106,6 @@ class GeneralizedMTLNASNet(nn.Module):
                 net1_fusion_input = [x]
                 net2_fusion_input = [y]
 
-            # net1_fusion_input = [x]
-            # net2_fusion_input = [y]
 
             for idx, input_id in enumerate(net1_path_ids):
                 net1_fusion_input.append(ys[input_id])
