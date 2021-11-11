@@ -2,25 +2,21 @@ import numpy as np
 import torch
 import torch.nn.functional as F
 
-'''
-这个是针对的分割任务
-'''
+
 def compute_hist(prediction, gt, n_classes, ignore_label):
     N, C, H, W = gt.size()#label
-    prediction = F.interpolate(prediction, (H, W), mode='bilinear', align_corners=True)#将预测的结果采用双线插值上采样或者下采样
-    #到和label一样大的尺寸
+    prediction = F.interpolate(prediction, (H, W), mode='bilinear', align_corners=True)
+
     prediction = torch.argmax(prediction, dim=1).flatten().cpu().numpy()#
     gt = gt.flatten().cpu().numpy()
     keep = np.logical_not(gt == ignore_label)
     merge = prediction[keep] * n_classes + gt[keep]
-    hist = np.bincount(merge, minlength=n_classes**2)#指定长度
+    hist = np.bincount(merge, minlength=n_classes**2)
     hist = hist.reshape((n_classes, n_classes))
-    correct_pixels = np.diag(hist).sum()#正确的像素点统计
+    correct_pixels = np.diag(hist).sum()
     valid_pixels = keep.sum()
     return hist, correct_pixels, valid_pixels
-'''
-这个是针对的表面估计任务
-'''
+
 
 def compute_angle(prediction, gt, ignore_label):
     N, C, H, W = gt.size()
