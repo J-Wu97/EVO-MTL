@@ -10,7 +10,7 @@ _C.TASK = 'pixel' # pixel (segmentation & normal) vs. image (classification)
 _C.DATASET = 'nyu_v2'  # or 'taskonomy'
 
 _C.LOG_DIR = 'run'  # Tensorboard log directory
-_C.SAVE_DIR = r'/home/jiewu/GA_MTL/MTL/ckpts'
+_C.SAVE_DIR = r'/home/jiewu/GA-MTL/ckpts'
 
 _C.CUDA = True
 _C.SEED = 1
@@ -44,7 +44,7 @@ _C.MODEL.NET2_CLASSES = 3
 #########################################################################################
 _C.ARCH = CN()
 
-_C.ARCH.SEARCHSPACE = 'GeneralizedMTLNAS' # Run nddr when this is empty
+_C.ARCH.SEARCHSPACE = 'EvoNet' # Run nddr when this is empty
 
 _C.ARCH.TRAIN_SPLIT = 0.7  # portion of the original training data to keep, with the rest being used for nas
 _C.ARCH.MIXED_DATA = True
@@ -95,13 +95,13 @@ _C.TRAIN.RANDOM_MIRROR = True
 _C.TRAIN.RANDOM_CROP = True
 _C.TRAIN.OUTPUT_SIZE = (321, 321)
 
-_C.TRAIN.WEIGHT_1 = 'DeepLab'
-_C.TRAIN.WEIGHT_2 = 'DeepLab'
+_C.TRAIN.WEIGHT_1 = 'Seg'
+_C.TRAIN.WEIGHT_2 = 'Normal'
 
 _C.TRAIN.BATCH_SIZE = 3
-_C.TRAIN.STEPS = 2790
+_C.TRAIN.STEPS = 20001
 _C.TRAIN.WARMUP = 0
-_C.TRAIN.LR = 0.001
+_C.TRAIN.LR = 5e-4
 _C.TRAIN.MOMENTUM = 0.9
 _C.TRAIN.WEIGHT_DECAY = 2.5e-4
 _C.TRAIN.POWER = 0.9
