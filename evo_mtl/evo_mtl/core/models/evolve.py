@@ -150,25 +150,9 @@ class Evolve_CNN:
     
     def selection(self, ind1, ind2):
         # Slack Binary Tournament Selection
-        MIou = 0.0120
-        Mean = 0.0120
-       
-        if ind1.MIou > ind2.MIou:
-           
-            if ind1.MIou - ind2.MIou > MIou: 
-                return ind1
-            else:
-                if ind1.Mean - ind2.Mean > Mean:
-                    return ind2
-                else:
-                    return ind1
+        if ind1.loss_test < ind2.loss_test:
+            return ind1
         else:
-            if ind2.MIou - ind1.MIou > MIou:
-                return ind2
-            else:
-                if ind2.Mean - ind1.Mean > Mean:
-                    return ind1
-                else:
-                    return ind2
+            return ind2
 
 
