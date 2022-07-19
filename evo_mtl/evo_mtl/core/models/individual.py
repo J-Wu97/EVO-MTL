@@ -25,7 +25,7 @@ class Individual:
         self.complxity = 0
 
     '''
-    initialize a simple CNN network including one convolutional layer, one pooling layer, and one full connection layer
+    initialize a simple CNN network
     '''
 
     def initialize(self):
@@ -44,7 +44,7 @@ class Individual:
             j_limit = stage_depths[np.argmax(stage_depths > i) - 1]
             for j in range(network_depth):
                 if j <= i and i - j < limit and j >= j_limit:
-                    if np.random.random(1)>0.3:
+                    if np.random.random(1)>0.5:
                         matrix[i, j] = 1.
         return matrix
 
@@ -91,59 +91,3 @@ def is_mutation(indi1, indi2):
     else:
         return True
 
-
-if __name__ =='__main__':
-
-    ind1 = Individual([2,2,3,3,3])
-    ind1.initialize()
-    ind2 = Individual([2,2,3,3,3])
-    ind2.initialize()
-    # print(ind1.indi_net1)
-    # print(ind2.indi_net1)
-    # print(ind1.indi_net2)
-    # print(ind2.indi_net2)
-    # ind1, ind2 = crossover(ind1,ind2)
-    # print("-----------------------------------")
-    # print(ind1.indi_net1)
-    # print(ind2.indi_net1)
-    # print(ind1.indi_net2)
-    # print(ind2.indi_net2)
-
-    # ind1 = copy.deepcopy(ind)
-    # ind1_net1 = copy.deepcopy(ind1.indi_net1)
-    # ind1_net2 = copy.deepcopy(ind1.indi_net2)
-    # ind.mutation()
-    # ind2 = copy.deepcopy(ind)
-    # ind2_net1 = copy.deepcopy(ind2.indi_net1)
-    # ind2_net2 = copy.deepcopy(ind2.indi_net2)
-    #
-    # print(ind1_net1,'\n', ind2_net1)
-    # print(ind1_net2,'\n', ind2_net2)
-    # print(is_mutation(ind1 , ind2))
-
-    # x = []
-    # y = []
-    # print(ind.indi_net1)
-    # print(ind.indi_net2)
-    # for i in range(13):
-    #     x.append(copy.deepcopy(ind.get_net1_layer_at(i)))
-    #     y.append(copy.deepcopy(ind.get_net2_layer_at(i)))
-    # for i in range(13):
-    #     ind.indi_net1[i] = y[i]
-    #     ind.indi_net2[i] = x[i]
-    # for i in range(13):
-    #     x[i] = y[i]
-    # print(ind.indi_net1)
-    # print(ind.indi_net2)
-    # z = copy.deepcopy(ind.indi_net1)
-    # w = copy.deepcopy(ind.indi_net2)
-    # print(z)
-    # print(w)
-
-    # x1 = ind.get_net1_layer_at(0)
-    # x2 = ind.get_net1_layer_at(12)
-    # print(x1)
-    # print(x2)
-    # ind.indi_net1[0] = x2
-    # print(ind.get_net1_layer_at(0))
-    # print(ind.indi_net1)
